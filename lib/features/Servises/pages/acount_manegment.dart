@@ -89,14 +89,17 @@ class _AccManegmentState extends State<AccManegment> {
               children: [
                 ListTile(
                   trailing: Icon(Icons.arrow_forward_ios),
-                  title: Text('Logout'),
+                  title: Text('Logout',),
                   onTap: () {
                     Navigator.pushNamed(context, '/Logout');
                   },
                 ),
-               //another useless comment
+                //another useless comment
                 ListTile(
-                  trailing: Icon(Icons.arrow_forward_ios),
+                  trailing: Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.red,
+                  ),
                   title: Text('delete account',
                       style: TextStyle(color: Colors.red)),
                   onTap: () {

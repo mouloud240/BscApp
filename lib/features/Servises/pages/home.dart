@@ -1,6 +1,26 @@
+import 'package:bsc_app/features/Servises/pages/acount_manegment.dart';
+import 'package:bsc_app/features/Servises/pages/profile.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final pages = [
+    hero(),
+    ProfilePage(username: 'islam', id: 'nkjb'),
+    AccManegment(username: 'islam'),
+  ];
+  late int _current;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _current = 0;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,119 +30,7 @@ class HomePage extends StatelessWidget {
           title: Text('Your Location'),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(
-                  fillColor: Color(0xFFF2F2F2),
-                  filled: true,
-                  hintText: ' Search',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(25.0),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text('Ask our IA'),
-              ),
-              SizedBox(height: 10),
-              Container(
-                width: 490,
-                height: 90,
-                decoration: BoxDecoration(
-                  color: Color(0xFFF2F2F2),
-                  borderRadius: BorderRadius.circular(28),
-                ),
-                padding: EdgeInsets.all(8),
-                alignment: Alignment.center,
-                child: Text('ask our ai'),
-              ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text('Boumerdes'),
-              ),
-              SizedBox(height: 10),
-              Container(
-                height: 181,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 362,
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD9D9D9),
-                        borderRadius: BorderRadius.circular(28),
-                      ),
-                      child: Center(child: Text('Picture ${index + 1}')),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text('hebergements'),
-              ),
-              SizedBox(height: 10),
-              Container(
-                height: 167,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 166,
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD9D9D9),
-                        borderRadius: BorderRadius.circular(28),
-                      ),
-                      child: Center(child: Text('Picture ${index + 1}')),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
-                alignment: Alignment.centerLeft,
-                child: Text('Complexes Touristiques'),
-              ),
-              SizedBox(height: 10),
-              Container(
-                height: 167,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      width: 166,
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD9D9D9),
-                        borderRadius: BorderRadius.circular(28),
-                      ),
-                      child: Center(child: Text('Picture ${index + 1}')),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
+      body: pages[_current],
       bottomNavigationBar: Container(
         margin: EdgeInsets.only(
             bottom: 20, left: 20, right: 20), // Add margin to the bottom
@@ -142,6 +50,8 @@ class HomePage extends StatelessWidget {
         child: ClipRRect(
           borderRadius: BorderRadius.circular(30),
           child: BottomNavigationBar(
+            currentIndex: _current,
+            onTap: (value) => setState(() => _current = value),
             backgroundColor: Color(
                 0xFF1C1B45), // Dark background color for the BottomNavigationBar
             elevation: 0,
@@ -163,6 +73,129 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class hero extends StatelessWidget {
+  const hero({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                fillColor: Color(0xFFF2F2F2),
+                filled: true,
+                hintText: ' Search',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                  borderSide: BorderSide.none,
+                ),
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text('Ask our IA'),
+            ),
+            SizedBox(height: 10),
+            Container(
+              width: 490,
+              height: 90,
+              decoration: BoxDecoration(
+                color: Color(0xFFF2F2F2),
+                borderRadius: BorderRadius.circular(28),
+              ),
+              padding: EdgeInsets.all(8),
+              alignment: Alignment.center,
+              child: Text('ask our ai'),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text('Boumerdes'),
+            ),
+            SizedBox(height: 10),
+            Container(
+              height: 181,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 362,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    child: Center(child: Text('Picture ${index + 1}')),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text('hebergements'),
+            ),
+            SizedBox(height: 10),
+            Container(
+              height: 167,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 166,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    child: Center(child: Text('Picture ${index + 1}')),
+                  );
+                },
+              ),
+            ),
+            SizedBox(height: 10),
+            Container(
+              padding: EdgeInsets.fromLTRB(8, 0, 0, 0),
+              alignment: Alignment.centerLeft,
+              child: Text('Complexes Touristiques'),
+            ),
+            SizedBox(height: 10),
+            Container(
+              height: 167,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Container(
+                    width: 166,
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFD9D9D9),
+                      borderRadius: BorderRadius.circular(28),
+                    ),
+                    child: Center(child: Text('Picture ${index + 1}')),
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );

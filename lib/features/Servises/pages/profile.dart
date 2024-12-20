@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   final String username;
   final String id;
+
+  ProfilePage({
+    required this.username,
+    required this.id,
+  });
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final Map<String, String> infoRoutes = {
     'Name': '/name',
     'Email': '/email',
@@ -10,11 +21,13 @@ class ProfilePage extends StatelessWidget {
     'Phone Number': '/phone_number',
     'Date of birth': '/date_of_birth',
   };
-
-  ProfilePage({
-    required this.username,
-    required this.id,
-  });
+  late int _current;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _current = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +40,11 @@ class ProfilePage extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    username,
+                    widget.username,
                     style: TextStyle(fontSize: 24, color: Colors.grey),
                   ),
                   Text(
-                    id,
+                    widget.id,
                     style: TextStyle(fontSize: 13, color: Colors.grey),
                   ),
                 ],
@@ -60,48 +73,7 @@ class ProfilePage extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: Container(
-          margin: EdgeInsets.only(
-              bottom: 20, left: 20, right: 20), // Add margin to the bottom
-          height: 65, // Taller height for the bottom bar
-          decoration: BoxDecoration(
-            color:
-                Colors.transparent, // Make the container background transparent
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.2),
-                blurRadius: 10,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: BottomNavigationBar(
-              backgroundColor: Color(
-                  0xFF1C1B45), // Dark background color for the BottomNavigationBar
-              elevation: 0,
-              type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.white,
-              unselectedItemColor: Colors.grey,
-              items: [
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.home),
-                  label: 'Home',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.person),
-                  label: 'Profile',
-                ),
-                BottomNavigationBarItem(
-                  icon: Icon(Icons.settings),
-                  label: 'Settings',
-                ),
-              ],
-            ),
-          ),
-        ),
+        
       ),
     );
   }
